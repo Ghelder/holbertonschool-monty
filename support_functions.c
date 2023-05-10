@@ -70,7 +70,9 @@ int get_opcode(char **commands, unsigned int counter, stack_t **head)
 	int i = 0;
 	instruction_t opcodes[] = {
 		{"push", _push}, {"pall", _pall},
-		{NULL, NULL}
+		{"pint", _pint}, {"pop", _pop},
+		{"swap", _swap}, {"add", _add},
+		{"nop", _nop}, {NULL, NULL}
 	};
 
 	while (opcodes[i].opcode)

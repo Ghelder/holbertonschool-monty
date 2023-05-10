@@ -1,4 +1,5 @@
 #include "monty.h"
+
 /**
  * _pall - Function to print elements
  * @head: Pointer to the stack
@@ -16,6 +17,7 @@ void _pall(stack_t **head, __attribute__((unused))unsigned int n)
 		temp = temp->next;
 	}
 }
+
 /**
  * _pint - Function that prints the value at the top of the stack
  * @head: Pointer to the stack
@@ -25,9 +27,14 @@ void _pall(stack_t **head, __attribute__((unused))unsigned int n)
  */
 void _pint(stack_t **head, unsigned int n)
 {
-	(void)head;
-	(void)n;
+	if ((*head) == NULL)
+	{
+		fprintf(stderr, "L%d: can't pint, stack empty\n", n);
+		exit(EXIT_FAILURE);
+	}
+	printf("%d\n", (*head)->n);
 }
+
 /**
  * _swap - Function that swaps the top two elements of the stack
  * @head: Pointer to the stack
@@ -39,9 +46,27 @@ void _pint(stack_t **head, unsigned int n)
  */
 void _swap(stack_t **head, unsigned int n)
 {
-	(void)head;
-	(void)n;
+	stack_t *temp = *head;
+	int len = 0, swap;
+
+	while (temp)
+	{
+		temp = temp->next;
+		len++;
+	}
+
+	if (len < 2)
+	{
+		fprintf(stderr, "L%d: can't swap, stack too short\n", n);
+		_free_stack(*head);
+		exit(EXIT_FAILURE);
+	}
+	temp = (*head)->next;
+	swap = temp->n;
+	temp->n = (*head)->n;
+	(*head)->n = swap;
 }
+
 /**
  * _nop - Function that doesn’t do anything.
  * @head: Pointer to the stack
@@ -55,5 +80,6 @@ void _nop(stack_t **head, unsigned int n)
 {
 	(void)head;
 	(void)n;
+	;
 }
 

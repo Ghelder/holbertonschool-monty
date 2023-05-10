@@ -46,11 +46,12 @@ void _pop(stack_t **head, unsigned int n)
 
 	if (*head == NULL)
 	{
-		fprintf(stderr, "L%d: can't pop an empty stack", n);
+		fprintf(stderr, "L%d: can't pop an empty stack\n", n);
 		exit(EXIT_FAILURE);
 	}
-	(*head) = tmp->next;
-	(*head)->prev = NULL;
+	*head = tmp->next;
+	if (*head)
+		(*head)->prev = NULL;
 	free(tmp);
 }
 /**
@@ -62,6 +63,25 @@ void _pop(stack_t **head, unsigned int n)
  **/
 void _add(stack_t **head, unsigned int n)
 {
-	(void)head;
-	(void)n;
+	stack_t *temp = *head;
+	int len = 0, num;
+
+	while (temp)
+	{
+		temp = temp->next;
+		len++;
+	}
+
+	if (len < 2)
+	{
+		fprintf(stderr, "L%d: can't add, stack too short\n", n);
+		_free_stack(*head);
+		exit(EXIT_FAILURE);
+	}
+	temp = *head;
+	(*head) = (*head)->next;
+	num = temp->n;
+	(*head)->n = (*head)->n + num;
+	(*head)->prev = NULL;
+	free(temp);
 }
