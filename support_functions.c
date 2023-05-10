@@ -34,7 +34,7 @@ void read_line(char *filename, stack_t **head)
 			free(buff);
 			_free_stack(*head);
 			fclose(fd);
-			exit(EXIT_FAILURE);
+			exit(EXIT_SUCCESS);
 		}
 		commands = tokenize_opcode(buff);
 		if (!commands)
@@ -52,7 +52,6 @@ void read_line(char *filename, stack_t **head)
 		}
 		free(commands);
 	}
-	free(buff);
 }
 
 
@@ -119,4 +118,48 @@ char **tokenize_opcode(char *buff)
 		return (tokens);
 	}
 	return (tokens);
+}
+
+/**
+ * check_atoi - Function to analyze second argument
+ * @str: The second argument of opcode
+ * @n: The counter
+ *
+ * Analyze second argument of opcode
+ *
+ * Return: The number got by atoi, exit otherwise
+ */
+
+int check_atoi(char *str, unsigned int n)
+{
+	int i = 0, letter = 0, num = 0;
+
+	if (str != NULL)
+	{
+		while (str[i] && !letter)
+		{
+			if ((str[i] > '9' || str[i] < '0') && str[i] != '-')
+				letter = 1;
+			i++;
+		}
+
+		num = atoi(str);
+	}
+	else
+	{
+
+		fprintf(stderr, "L%d: usage: push integer\n", n);
+		exit(EXIT_FAILURE);
+	}
+	if (!num || letter)
+	{
+		if (((strcmp(str, "0") != 0)
+					&& (strcmp(str, "-0") != 0))
+					&& letter)
+		{
+		fprintf(stderr, "L%d: usage: push integer\n", n);
+		exit(EXIT_FAILURE);
+		}
+	}
+	return (num);
 }

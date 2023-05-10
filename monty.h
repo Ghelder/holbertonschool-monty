@@ -55,5 +55,6 @@ void read_line(char *, stack_t **);
 char **tokenize_opcode(char *);
 int get_opcode(char **commands, unsigned int, stack_t **);
 void _free_stack(stack_t *);
+int check_atoi(char *, unsigned int);
 
 #endif /* MONTY_H */

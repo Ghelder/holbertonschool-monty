@@ -10,7 +10,7 @@
 void _push(stack_t **head, unsigned int n)
 {
 	stack_t *new = NULL;
-	int num;
+	int num = 0;
 
 	new = malloc(sizeof(stack_t));
 	if (new == NULL)
@@ -19,15 +19,9 @@ void _push(stack_t **head, unsigned int n)
 		_free_stack(*head);
 		exit(EXIT_FAILURE);
 	}
-	num = atoi(commands[1]);
-	if (!num)
-	{
-		fprintf(stderr, "L%d: usage: push integer", n);
-		exit(EXIT_FAILURE);
-	}
+	num = check_atoi(commands[1], n);
 	new->n = num;
 	new->prev = NULL;
-
 	if (*head == NULL)
 	{
 		new->next = NULL;
