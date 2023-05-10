@@ -1,40 +1,53 @@
+#include "monty.h"
+
 /**
- * add_dnodeint - function that adds a new node at the
- * beginning of a list
+ * _push - function that adds a new node
  * @head: pointer to stack_t pointer
- * @n: number
+ * @n: line number
  *
- * Return: the new node
+ * Return: Void
  **/
-dlistint_t *add_dnodeint(stack_t **head, const int n)
+void _push(stack_t **head, unsigned int n)
 {
-	stack_t *new;
+	stack_t *new = NULL;
+	int num;
 
 	new = malloc(sizeof(stack_t));
 	if (new == NULL)
-		return (NULL);
-	new->n = n;
+	{
+		fprintf(stderr, "Error: malloc failed\n");
+		_free_stack(*head);
+		exit(EXIT_FAILURE);
+	}
+	num = atoi(commands[1]);
+	if (!num)
+	{
+		fprintf(stderr, "L%d: usage: push integer", n);
+		exit(EXIT_FAILURE);
+	}
+	new->n = num;
 	new->prev = NULL;
 
 	if (*head == NULL)
 	{
 		new->next = NULL;
 		*head = new;
-	} else
+	}
+	else
 	{
 		(*head)->prev = new;
 		new->next = *head;
 		*head = new;
 	}
-	return (*head);
 }
+
 /**
- * free_dlistint - function that frees a list
- * @head: pointer to stack_t struct
+ * _free_stack - function that frees a list
+ * @head: pointer to stack's head
  *
  * Return: Always void
  **/
-void free_dlistint(stack_t *head)
+void _free_stack(stack_t *head)
 {
 	stack_t *ptr = head;
 	stack_t *tmp;
@@ -54,44 +67,44 @@ void free_dlistint(stack_t *head)
 		ptr = head;
 	}
 }
+
 /**
- * delete_dnodeint_at_index - function that deletes a node at index of a list
+ * _pop - function that deletes a node at the top
  * @head: Pointer to stack_t pointer
- * @index: Index
+ * @n: The line in the file
  *
- * Return: 1 if it succeeded, -1 if it failed
+ * Return: Void
  **/
-int delete_dnodeint_at_index(stack_t **head, unsigned int index)
+void _pop(stack_t **head, unsigned int n)
 {
 	stack_t *tmp = *head;
-	unsigned int cnt = 0;
 
 	if (*head == NULL)
-		return (-1);
-	if (index == 0)
 	{
-		*head = tmp->next;
-		if (tmp->next != NULL)
-			tmp->next->prev = NULL;
-		free(tmp);
-		return (1);
+		fprintf(stderr, "L%d: can't pop an empty stack", n);
+		exit(EXIT_FAILURE);
 	}
-	while (cnt < index)
-	{
-		if (tmp->next == NULL)
-			return (-1);
-		tmp = tmp->next;
-		cnt++;
-	}
-	tmp->prev->next = tmp->next;
-	if (tmp->next)
-		tmp->next->prev = tmp->prev;
-	if (tmp->next == NULL)
-	{
-		tmp->prev->next = NULL;
-		free(tmp);
-		return (1);
-	}
+	(*head) = tmp->next;
+	(*head)->prev = NULL;
 	free(tmp);
-	return (1);
+}
+
+/**
+ * _pall - Function to print elements
+ * @head: Pointer to the stack
+ * @n: The line number
+ *
+ * Prints all the elements of a stack
+ *
+ * Return: Void
+ */
+void _pall(stack_t **head, __attribute__((unused))unsigned int n)
+{
+	stack_t *temp = *head;
+
+	while (temp)
+	{
+		printf("%d\n", temp->n);
+		temp = temp->next;
+	}
 }

@@ -1,5 +1,16 @@
 #ifndef MONTY_H
 #define MONTY_H
+
+#include <stdio.h>
+#include <string.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <sys/types.h>
+
+
+extern char **commands;
+
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -15,6 +26,7 @@ typedef struct stack_s
 	struct stack_s *prev;
 	struct stack_s *next;
 } stack_t;
+
 /**
  * struct instruction_s - opcode and its function
  * @opcode: the opcode
@@ -28,4 +40,20 @@ typedef struct instruction_s
 	char *opcode;
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
+
+/* OPCODES */
+void _push(stack_t **, unsigned int);
+void _pop(stack_t **, unsigned int);
+void _pint(stack_t **, unsigned int);
+void _swap(stack_t **, unsigned int);
+void _add(stack_t **, unsigned int);
+void _pall(stack_t **, unsigned int);
+void _nop(stack_t **, unsigned int);
+
+/* SUPPORT */
+void read_line(char *, stack_t **);
+char **tokenize_opcode(char *);
+int get_opcode(char **commands, unsigned int, stack_t **);
+void _free_stack(stack_t *);
+
 #endif /* MONTY_H */
