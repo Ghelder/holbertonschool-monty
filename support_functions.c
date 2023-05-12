@@ -79,7 +79,7 @@ int get_opcode(char **commands, unsigned int counter, stack_t **head)
 		{"div", _div}, {"mul", _mul},
 		{"mod", _mod}, {"pchar", _pchar},
 		{"pstr", _pstr}, {"rotl", _rotl},
-		{NULL, NULL}
+		{"rotr", _rotr}, {NULL, NULL}
 	};
 
 	while (opcodes[i].opcode)

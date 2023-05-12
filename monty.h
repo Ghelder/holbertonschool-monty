@@ -57,6 +57,7 @@ void _pchar(stack_t **, unsigned int);
 /* 2 */
 void _pstr(stack_t **, unsigned int);
 void _rotl(stack_t **, unsigned int);
+void _rotr(stack_t **, unsigned int);
 
 
 /* SUPPORT */
