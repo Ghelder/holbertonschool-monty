@@ -54,6 +54,7 @@ void _div(stack_t **, unsigned int);
 void _mul(stack_t **, unsigned int);
 void _mod(stack_t **, unsigned int);
 void _pchar(stack_t **, unsigned int);
+void _pstr(stack_t **head, __attribute__((unused))unsigned int n);
 
 /* SUPPORT */
 void read_line(char *, stack_t **);
