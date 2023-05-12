@@ -135,9 +135,9 @@ unsigned int check_ds(char *opcode)
 {
 	unsigned int ds = 0;
 
-	if (strncmp(opcode, "queue", strlen(opcode) - 1) == 0)
+	if (strncmp(opcode, "queue", strlen(opcode)) == 0)
 		ds = 2;
-	else if (strncmp(opcode, "stack", strlen(opcode) - 1) == 0)
+	else if (strncmp(opcode, "stack", strlen(opcode)) == 0)
 		ds = 1;
 	return (ds);
 }

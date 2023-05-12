@@ -66,6 +66,7 @@ void read_line(char *, stack_t **);
 char **tokenize_opcode(char *);
 int get_opcode(char **commands, unsigned int, stack_t **, unsigned int);
 void _free_stack(stack_t *);
+void check_getline(char *, stack_t *, FILE *);
 int check_atoi(char *, unsigned int);
 char *trim_spaces(char *str);
 void opcode_not_found(stack_t *head, char **commands, char *buff, FILE *fd,

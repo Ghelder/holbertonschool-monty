@@ -14,8 +14,8 @@ char **commands = NULL;
 void read_line(char *filename, stack_t **head)
 {
 	char *buff = NULL, *opcode;
-	size_t size = 0;
 	ssize_t chars;
+	size_t size = 0;
 	unsigned int counter = 0, run = 1, flag = 1, ds;
 	FILE *fd;
 
@@ -30,24 +30,20 @@ void read_line(char *filename, stack_t **head)
 		chars = getline(&buff, &size, fd);
 		counter++;
 		if (chars == -1)
-		{
-			free(buff);
-			_free_stack(*head);
-			fclose(fd);
-			exit(EXIT_SUCCESS);
-		}
+			check_getline(buff, *head, fd);
 		opcode = trim_spaces(buff);
 		if (opcode[0] == 35)
 			continue;
-		ds = check_ds(opcode);
-		if (ds)
-		{
-			flag = ds;
-			continue;
-		}
 		commands = tokenize_opcode(opcode);
 		if (!commands)
 			continue;
+		ds = check_ds(commands[0]);
+		if (ds)
+		{
+			flag = ds;
+			free(commands);
+			continue;
+		}
 		run = get_opcode(commands, counter, head, flag);
 		if (run == 0)
 			opcode_not_found(*head, commands, buff, fd, counter);
@@ -61,6 +57,7 @@ void read_line(char *filename, stack_t **head)
  * @head: Pointer to the stack
  * @commands: The opcodes tokenized
  * @counter: The counter
+ * @ds: The data structure, 1 if stack, 2 if queue
  *
  * Search a opcode and execute its function
  *
