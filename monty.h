@@ -49,6 +49,11 @@ void _swap(stack_t **, unsigned int);
 void _add(stack_t **, unsigned int);
 void _pall(stack_t **, unsigned int);
 void _nop(stack_t **, unsigned int);
+void _sub(stack_t **, unsigned int);
+void _div(stack_t **, unsigned int);
+void _mul(stack_t **, unsigned int);
+void _mod(stack_t **, unsigned int);
+void _pchar(stack_t **, unsigned int);
 
 /* SUPPORT */
 void read_line(char *, stack_t **);
@@ -56,5 +61,6 @@ char **tokenize_opcode(char *);
 int get_opcode(char **commands, unsigned int, stack_t **);
 void _free_stack(stack_t *);
 int check_atoi(char *, unsigned int);
+char *trim_spaces(char *str);
 
 #endif /* MONTY_H */

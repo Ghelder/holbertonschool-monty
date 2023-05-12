@@ -5,6 +5,8 @@
  * @head: Pointer to the stack
  * @n: The line number
  *
+ * Print the entire stack
+ *
  * Return: Void
  */
 void _pall(stack_t **head, __attribute__((unused))unsigned int n)
@@ -81,5 +83,34 @@ void _nop(stack_t **head, unsigned int n)
 	(void)head;
 	(void)n;
 	;
+}
+
+
+/**
+ * _pchar - Function to print character
+ * @head: Pointer to the stack
+ * @n: The line number
+ *
+ * Print the number in character
+ *
+ * Return: Void
+ */
+void _pchar(stack_t **head, unsigned int n)
+{
+	stack_t *temp = *head;
+	int num;
+
+	if (!(*head))
+	{
+		fprintf(stderr, "L%d: can't pchar, stack empty\n", n);
+		exit(EXIT_FAILURE);
+	}
+	num = temp->n;
+	if (num < 33 || num > 255)
+	{
+		fprintf(stderr, "L%d: can't pchar, value out of range\n", n);
+		exit(EXIT_FAILURE);
+	}
+	fprintf(stdout, "%c\n", num);
 }
 

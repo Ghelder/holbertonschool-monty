@@ -13,7 +13,7 @@ char **commands = NULL;
  */
 void read_line(char *filename, stack_t **head)
 {
-	char *buff = NULL;
+	char *buff = NULL, *opcode;
 	size_t size = 0;
 	ssize_t chars;
 	unsigned int counter = 0, run = 1;
@@ -36,8 +36,9 @@ void read_line(char *filename, stack_t **head)
 			fclose(fd);
 			exit(EXIT_SUCCESS);
 		}
-		commands = tokenize_opcode(buff);
-		if (!commands)
+		opcode = trim_spaces(buff);
+		commands = tokenize_opcode(opcode);
+		if (!commands || opcode[0] == 35)
 			continue;
 		run = get_opcode(commands, counter, head);
 		if (run == 0)
@@ -122,46 +123,3 @@ char **tokenize_opcode(char *buff)
 	return (tokens);
 }
 
-/**
- * check_atoi - Function to analyze second argument
- * @str: The second argument of opcode
- * @n: The counter
- *
- * Analyze second argument of opcode
- *
- * Return: The number got by atoi, exit otherwise
- */
-
-int check_atoi(char *str, unsigned int n)
-{
-	int i = 0, letter = 0, num = 0;
-
-	if (str != NULL)
-	{
-		while (str[i] && !letter)
-		{
-			if ((str[i] > '9' || str[i] < '0') && str[i] != '-')
-				letter = 1;
-			i++;
-		}
-
-		num = atoi(str);
-	}
-	else
-	{
-
-		fprintf(stderr, "L%d: usage: push integer\n", n);
-		exit(EXIT_FAILURE);
-	}
-	if (!num || letter)
-	{
-		if (((strcmp(str, "0") != 0)
-					&& (strcmp(str, "-0") != 0))
-					&& letter)
-		{
-		fprintf(stderr, "L%d: usage: push integer\n", n);
-		exit(EXIT_FAILURE);
-		}
-	}
-	return (num);
-}

@@ -1,8 +1,11 @@
 #include "monty.h"
+
 /**
  * _push - function that adds a new node
  * @head: pointer to stack_t pointer
  * @n: line number
+ *
+ * Push a new element in the stack
  *
  * Return: Void
  **/
@@ -53,35 +56,4 @@ void _pop(stack_t **head, unsigned int n)
 	if (*head)
 		(*head)->prev = NULL;
 	free(tmp);
-}
-/**
- * _add - function that adds the top two elements of the stack
- * @head: Pointer to stack_t pointer
- * @n: The line in the file
- *
- * Return: Void
- **/
-void _add(stack_t **head, unsigned int n)
-{
-	stack_t *temp = *head;
-	int len = 0, num;
-
-	while (temp)
-	{
-		temp = temp->next;
-		len++;
-	}
-
-	if (len < 2)
-	{
-		fprintf(stderr, "L%d: can't add, stack too short\n", n);
-		_free_stack(*head);
-		exit(EXIT_FAILURE);
-	}
-	temp = *head;
-	(*head) = (*head)->next;
-	num = temp->n;
-	(*head)->n = (*head)->n + num;
-	(*head)->prev = NULL;
-	free(temp);
 }
