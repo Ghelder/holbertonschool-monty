@@ -37,8 +37,10 @@ void read_line(char *filename, stack_t **head)
 			exit(EXIT_SUCCESS);
 		}
 		opcode = trim_spaces(buff);
+		if (opcode[0] == 35)
+			continue;
 		commands = tokenize_opcode(opcode);
-		if (!commands || opcode[0] == 35)
+		if (!commands)
 			continue;
 		run = get_opcode(commands, counter, head);
 		if (run == 0)

@@ -57,9 +57,9 @@ void _sub(stack_t **head, unsigned int n)
 		exit(EXIT_FAILURE);
 	}
 	temp = *head;
-	(*head) = (*head)->next;
+	(*head) = temp->next;
 	num = temp->n;
-	(*head)->n = (num > (*head)->n) ? num - (*head)->n : (*head)->n - num;
+	(*head)->n = (*head)->n - num;
 	(*head)->prev = NULL;
 	free(temp);
 }

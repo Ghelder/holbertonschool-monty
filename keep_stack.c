@@ -106,7 +106,7 @@ void _pchar(stack_t **head, unsigned int n)
 		exit(EXIT_FAILURE);
 	}
 	num = temp->n;
-	if (num < 33 || num > 255)
+	if (num < 33 || num > 127)
 	{
 		fprintf(stderr, "L%d: can't pchar, value out of range\n", n);
 		exit(EXIT_FAILURE);
