@@ -12,7 +12,7 @@ void _pstr(stack_t **head, __attribute__((unused))unsigned int n)
 {
 	stack_t *temp = *head;
 
-	while (temp && temp->n != 0)
+	while (temp && temp->n > 0 && temp->n < 127)
 	{
 		putchar(temp->n);
 		temp = temp->next;
