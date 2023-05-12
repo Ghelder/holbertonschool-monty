@@ -96,3 +96,48 @@ void _free_stack(stack_t *head)
 		ptr = head;
 	}
 }
+
+
+/**
+ * opcode_not_found - function that free malloc
+ * @head: pointer to stack's head
+ * @commands: The opcode in tokens
+ * @buff: The line containing the opcode
+ * @fd: The stream
+ * @counter: The counter lines
+ *
+ * Free all malloc if opcode is not found
+ *
+ * Return: Always void
+ **/
+
+void opcode_not_found(stack_t *head, char **commands, char *buff, FILE *fd,
+		int counter)
+{
+	fprintf(stderr, "L%d: unknown instruction %s\n", counter, commands[0]);
+	free(commands);
+	free(buff);
+	_free_stack(head);
+	fclose(fd);
+	exit(EXIT_FAILURE);
+}
+
+/**
+ * check_ds - function that checks data structure
+ * @opcode: The opcode command
+ *
+ * Checks if we are in a stack or a queue data structure
+ *
+ * Return: 1 if stack, 2 if queue
+ **/
+
+unsigned int check_ds(char *opcode)
+{
+	unsigned int ds = 0;
+
+	if (strncmp(opcode, "queue", 5) == 0)
+		ds = 2;
+	else if (strncmp(opcode, "stack", 5) == 0)
+		ds = 1;
+	return (ds);
+}

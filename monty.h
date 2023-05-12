@@ -43,6 +43,7 @@ typedef struct instruction_s
 
 /* OPCODES */
 void _push(stack_t **, unsigned int);
+void _push_queue(stack_t **, unsigned int);
 void _pop(stack_t **, unsigned int);
 void _pint(stack_t **, unsigned int);
 void _swap(stack_t **, unsigned int);
@@ -63,9 +64,12 @@ void _rotr(stack_t **, unsigned int);
 /* SUPPORT */
 void read_line(char *, stack_t **);
 char **tokenize_opcode(char *);
-int get_opcode(char **commands, unsigned int, stack_t **);
+int get_opcode(char **commands, unsigned int, stack_t **, unsigned int);
 void _free_stack(stack_t *);
 int check_atoi(char *, unsigned int);
 char *trim_spaces(char *str);
+void opcode_not_found(stack_t *head, char **commands, char *buff, FILE *fd,
+		int counter);
+unsigned int check_ds(char *opcode);
 
 #endif /* MONTY_H */
