@@ -19,3 +19,30 @@ void _pstr(stack_t **head, __attribute__((unused))unsigned int n)
 	}
 	putchar('\n');
 }
+/**
+ * _rotl - function
+ * @head: Pointer to the stack
+ * @n: The line nummber
+ *
+ * Return: Void
+ **/
+void _rotl(stack_t **head, __attribute__((unused))unsigned int n)
+{
+	stack_t *tmp_top = *head;
+	stack_t *tmp_end = *head;
+	int top;
+
+	if ((*head) == NULL || (*head)->next == NULL)
+		return;
+
+	top = (*head)->n;
+	tmp_top = (*head)->next;
+	while (tmp_top)
+	{
+		tmp_end->n = tmp_top->n;
+		if (tmp_top->next == NULL)
+			tmp_top->n = top;
+		tmp_top = tmp_top->next;
+		tmp_end = tmp_end->next;
+	}
+}
