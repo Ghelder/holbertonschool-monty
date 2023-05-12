@@ -16,7 +16,7 @@
 ## 📙 Description
 
 + For this project, we created an interpreter for Monty ByteCodes. The interpreter reads a bytecode file and executes the bytecode commands.
-+ The Monty language Monty 0.98 is a scripting language that is first compiled into Monty byte codes (Just like Python).
++ The [Monty language Monty](https://montyscoconut.github.io/) 0.98 is a scripting language that is first compiled into Monty byte codes (Just like Python).
 + Monty byte code files
 Files containing Monty byte codes usually have the .m extension. Most of the industry uses this standard but it is not required by the specification of the language. There is not more than one instruction per line. There can be any number of spaces before or after the opcode and its argument.
 + Monty byte code files can contain blank lines (empty or made of spaces only, and any additional text after the opcode or its required argument is not taken into account)
@@ -142,7 +142,8 @@ root@ubuntu:~/monty$
 | ------------ | ------------ |
 | *main.c* | The main function that runs our interpreter `monty`|
 | *monty.h* | All prototypes and includes|
-| *list_functions.c* | Function  to free our stack |
+| *aux_functions.c* | Auxiliary functions |
+| *arith_modify_stack.c* | Arithmetic functions opcodes |
 | *support_functions.c* | Support functions to use in other functions |
 | *modify_stack.c* | Functions that modify our stack |
 | *keep_stack.c* | Functions that does not modify our stack |
